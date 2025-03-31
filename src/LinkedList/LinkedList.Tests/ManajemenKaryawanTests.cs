@@ -27,7 +27,7 @@ public class ManajemenKaryawanTests
         Assert.AreEqual("Bob Smith", node.Karyawan.Nama); // Verifikasi Nama
         Assert.AreEqual("HR Manager", node.Karyawan.Posisi); // Verifikasi Posisi
         Assert.IsNull(node.Next); // Verifikasi bahwa Next null pada saat inisialisasi
-        Assert.IsNull(node.Prev); // Verifikasi bahwa Prev null pada saat inisialisasi
+        Assert.IsNull(node.prev); // Verifikasi bahwa Prev null pada saat inisialisasi
     }
 
     [TestMethod]
@@ -41,10 +41,10 @@ public class ManajemenKaryawanTests
 
         // Menghubungkan node1 dan node2
         node1.Next = node2;
-        node2.Prev = node1;
+        node2.prev = node1;
 
         Assert.AreEqual(node2, node1.Next); // Verifikasi bahwa node1 terhubung ke node2 sebagai Next
-        Assert.AreEqual(node1, node2.Prev); // Verifikasi bahwa node2 terhubung ke node1 sebagai Prev
+        Assert.AreEqual(node1, node2.prev); // Verifikasi bahwa node2 terhubung ke node1 sebagai Prev
     }
 
     [TestMethod]
@@ -54,7 +54,7 @@ public class ManajemenKaryawanTests
         var karyawan = new Karyawan("001", "John Doe", "Manager");
         daftar.TambahKaryawan(karyawan);
 
-        string hasil = daftar.TampilkanDaftar();
+        string hasil = daftarKaryawan.TampilDaftarKaryawan();
         Assert.IsTrue(hasil.Contains("John Doe")); // Verifikasi bahwa karyawan berhasil ditambahkan
     }
 
@@ -66,7 +66,7 @@ public class ManajemenKaryawanTests
         bool penghapusanBerhasil = daftar.HapusKaryawan("001");
 
         Assert.IsTrue(penghapusanBerhasil); // Verifikasi bahwa penghapusan berhasil
-        Assert.IsTrue(string.IsNullOrEmpty(daftar.TampilkanDaftar())); // Verifikasi daftar karyawan kosong setelah penghapusan
+        Assert.IsTrue(string.IsNullOrEmpty(daftarKaryawan.TampilkanDaftar())); // Verifikasi daftar karyawan kosong setelah penghapusan
     }
 
     [TestMethod]
@@ -86,7 +86,7 @@ public class ManajemenKaryawanTests
         daftar.TambahKaryawan(new Karyawan("001", "John Doe", "Manager"));
         var hasilCari = daftar.CariKaryawan("John");
 
-        Assert.AreEqual(1, hasilCari.Length); // Verifikasi bahwa satu karyawan ditemukan
+        Assert.AreEqual(1, hasilCari.lenght); // Verifikasi bahwa satu karyawan ditemukan
         Assert.AreEqual("John Doe", hasilCari[0].Nama); // Verifikasi bahwa nama karyawan sesuai
     }
 
@@ -97,7 +97,7 @@ public class ManajemenKaryawanTests
         daftar.TambahKaryawan(new Karyawan("001", "John Doe", "Manager"));
         var hasilCari = daftar.CariKaryawan("Jane");
 
-        Assert.AreEqual(0, hasilCari.Length); // Verifikasi bahwa tidak ada karyawan yang ditemukan
+        Assert.AreEqual(0, hasil.Length); // Verifikasi bahwa tidak ada karyawan yang ditemukan
     }
 
     [TestMethod]
@@ -107,7 +107,7 @@ public class ManajemenKaryawanTests
         daftar.TambahKaryawan(new Karyawan("001", "John Doe", "Manager"));
         daftar.TambahKaryawan(new Karyawan("002", "Jane Doe", "HR"));
 
-        string hasil = daftar.TampilkanDaftar();
+        string hasil = daftarKaryawan.TampilDaftarKaryawan();
         Assert.IsTrue(hasil.StartsWith("002; Jane Doe; HR")); // Verifikasi bahwa karyawan terakhir yang ditambahkan tampil pertama
         Assert.IsTrue(hasil.EndsWith("001; John Doe; Manager")); // Verifikasi bahwa karyawan pertama yang ditambahkan tampil terakhir
     }
